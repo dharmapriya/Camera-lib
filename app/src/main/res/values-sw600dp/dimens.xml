@@ -1,0 +1,6 @@
+<resources>
+    <!-- camera icons -->
+    <dimen name="camera_general_icon_size">100dp</dimen>
+    <dimen name="camera_close_icon_size">60dp</dimen>
+    <dimen name="camera_discard_icon_size">80dp</dimen>
+</resources>

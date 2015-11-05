@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IVYCamera</string>
+    <string name="forwadslash">/</string>
+    <string name="jpg">jpg</string>
+    <string name="png">png</string>
+    <string name="gif">gif</string>
+    <string name="saved_successfully">Saved Successfully.</string>
+</resources>

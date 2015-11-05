@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capture Image"
+        android:id="@+id/imgcapture"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"/>
+
+    <ImageView
+        android:id="@+id/displayimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgcapture"
+        android:layout_centerInParent="true"
+        android:src="@drawable/no_image_available"/>
+
+</RelativeLayout>

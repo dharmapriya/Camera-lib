@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#000">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+         >
+
+        <FrameLayout
+            android:id="@+id/cameraHolderFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/camera_general_icon_size"
+            android:layout_marginBottom="@dimen/camera_general_icon_size"
+           >
+
+
+        </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:id="@+id/cancelBTN"
+
+                    android:layout_width="@dimen/camera_close_icon_size"
+                    android:layout_height="@dimen/camera_close_icon_size"
+                    android:src="@drawable/ic_camera_cancel_enable"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/discardBTN"
+
+                    />
+                <ImageView
+                    android:id="@+id/discardBTN"
+                    android:layout_width="@dimen/camera_discard_icon_size"
+                    android:layout_height="@dimen/camera_discard_icon_size"
+                    android:layout_toLeftOf="@+id/saveBTN"
+                    android:src="@drawable/ic_camera_discard_enable"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                   />
+
+
+                <ImageView
+                    android:id="@+id/saveBTN"
+
+                    android:layout_width="@dimen/camera_general_icon_size"
+                    android:layout_height="@dimen/camera_general_icon_size"
+
+                    android:layout_toLeftOf="@+id/takepictureBTN"
+                    android:src="@drawable/ic_camera_save_enable"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    />
+                <ImageView
+                    android:id="@+id/takepictureBTN"
+                    android:layout_width="@dimen/camera_general_icon_size"
+                    android:layout_height="@dimen/camera_general_icon_size"
+                    android:src="@drawable/ic_camera_capture_enable"
+
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
