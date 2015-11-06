@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
     private Button imgcapture;
     private ImageView displayimg;
     private String imgpathsaved = "";
-
+    // Test Abbas
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
