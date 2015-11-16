@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
     private ImageView displayimg;
     private String imgpathsaved = "";
     // Test Abbas
+    // Test Gp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
