@@ -31,7 +31,6 @@ import android.widget.Toast;
 import com.ivy.android.ivycamera.MainActivity;
 import com.ivy.android.ivycamera.R;
 
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,12 +52,9 @@ public class CameraActivity extends Activity implements CameraCallback,
     private int mImageQuality = 50;
     private byte[] mImageData = null;
     private Bitmap mCapturedImage = null;
-    private String savedpath="";
-    private boolean isClicked=false;
-
-
+    private String savedpath = "";
+    private boolean isClicked = false;
     private ImageView captureBTN, cancelBTN, saveBTN, discardBTN;
-
     private OrientationEventListener orientationEventListener;
     public Bitmap cancelBTNbitmap, discardBTNbitmap, saveBTNbitmap;
     public int camera_picture_width, camera_picture_height;
@@ -110,7 +106,8 @@ public class CameraActivity extends Activity implements CameraCallback,
         }
 
         Display display = getWindowManager().getDefaultDisplay();
-         Log.e("image path", mImagePath);
+
+        Log.e("image path", mImagePath);
 
         cameraHolderFrame = (FrameLayout) findViewById(R.id.cameraHolderFrame);
         cameraSurface = new CameraSurface(this, getResources().getConfiguration().orientation, cameraHolderFrame
@@ -154,7 +151,7 @@ public class CameraActivity extends Activity implements CameraCallback,
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-      super.onSaveInstanceState(savedInstanceState);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -171,15 +168,13 @@ public class CameraActivity extends Activity implements CameraCallback,
                         Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-
-
                 cameraHolderFrame.addView(cameraSurface, new LayoutParams(
                         LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
                 cameraSurface.setCallback(this);
             }
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -199,15 +194,15 @@ public class CameraActivity extends Activity implements CameraCallback,
 
             int i = v.getId();
             if (i == R.id.cancelBTN) {
-                if(!isClicked) {
-                    isClicked=true;
+                if (!isClicked) {
+                    isClicked = true;
                     cameraSurface.stopTakePicture();
                     setResult(RESULT_CANCEL);
                     finish();
 
                 }
             } else if (i == R.id.takepictureBTN) {
-                if(!isClicked) {
+                if (!isClicked) {
                     isClicked = true;
 
                     cameraSurface.startTakePicture();
@@ -216,11 +211,11 @@ public class CameraActivity extends Activity implements CameraCallback,
 
 
             } else if (i == R.id.saveBTN) {
-                if(!isClicked) {
+                if (!isClicked) {
                     isClicked = true;
 
                     try {
-                       new SaveCapturedImageTask().execute();
+                        new SaveCapturedImageTask().execute();
                     } catch (Exception e) {
 
                     }
@@ -229,7 +224,7 @@ public class CameraActivity extends Activity implements CameraCallback,
 
             } else if (i == R.id.discardBTN) {
                 //isClick = false;
-                if(!isClicked) {
+                if (!isClicked) {
                     isClicked = true;
                     cameraSurface.startPreview();
                     mImageData = null;
@@ -254,7 +249,7 @@ public class CameraActivity extends Activity implements CameraCallback,
         enableimgview2.setVisibility(View.VISIBLE);
         disableimgview1.setVisibility(View.GONE);
         disableimgview2.setVisibility(View.GONE);
-        isClicked=false;
+        isClicked = false;
 
     }
 
@@ -297,12 +292,12 @@ public class CameraActivity extends Activity implements CameraCallback,
     }
 
     private void storeCapturedImage() {
-      //  Log.e("mCapturedImage ",mCapturedImage.getWidth()+"");
+        //  Log.e("mCapturedImage ",mCapturedImage.getWidth()+"");
         if (mCapturedImage != null) {
             FileOutputStream fileOutputStream = null;
             try {
-                savedpath=mImagePath+ "/" +now()+".jpg";
-                Log.e("savedpath ",savedpath);
+                savedpath = mImagePath + "/" + now() + ".jpg";
+                Log.e("savedpath ", savedpath);
                 fileOutputStream = new FileOutputStream(savedpath);
 
                 BufferedOutputStream bos = new BufferedOutputStream(
@@ -378,6 +373,7 @@ public class CameraActivity extends Activity implements CameraCallback,
         }
         return true;
     }
+
     public void showAlert(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(CameraActivity.this);
         builder.setMessage(msg);
@@ -385,8 +381,8 @@ public class CameraActivity extends Activity implements CameraCallback,
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                Intent i=new Intent(CameraActivity.this, MainActivity.class);
-                i.putExtra("displayimg",savedpath);
+                Intent i = new Intent(CameraActivity.this, MainActivity.class);
+                i.putExtra("displayimg", savedpath);
                 startActivity(i);
                 finish();
             }
@@ -401,12 +397,10 @@ public class CameraActivity extends Activity implements CameraCallback,
         protected Boolean doInBackground(String... arg0) {
             try {
 
-                Log.e("checkcreatedir" , " " + checkCreateDir()
+                Log.e("checkcreatedir", " " + checkCreateDir()
                         + " " + mImagePath);
                 if (mImagePath != null && checkCreateDir())
                     storeCapturedImage();
-
-                cameraSurface.stopTakePicture();
 
                 return Boolean.TRUE;
             } catch (Exception e) {
@@ -417,16 +411,22 @@ public class CameraActivity extends Activity implements CameraCallback,
         }
 
         protected void onPreExecute() {
-           }
+        }
 
         protected void onProgressUpdate(Integer... progress) {
 
         }
 
         protected void onPostExecute(Boolean result) {
-          setResult(RESULT_SAVE);
-             showAlert(
-                    getResources().getString(R.string.saved_successfully));
+
+            try {
+                cameraSurface.stopTakePicture();
+            }catch(Exception e){
+
+            }
+
+            setResult(RESULT_SAVE);
+            showAlert(getResources().getString(R.string.saved_successfully));
 
 
         }
@@ -434,7 +434,7 @@ public class CameraActivity extends Activity implements CameraCallback,
     }
 
     public static String now() {
-        String format="yyDHHmmss";
+        String format = "yyDHHmmss";
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
         return sdf.format(cal.getTime());
